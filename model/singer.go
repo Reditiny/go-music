@@ -1,9 +1,7 @@
 package model
 
-import "gorm.io/gorm"
-
 type Singer struct {
-	gorm.Model
+	Basic
 	Name         string `orm:"name" json:"name"`
 	Sex          int    `orm:"sex" json:"sex"`
 	Pic          string `orm:"pic" json:"pic"`

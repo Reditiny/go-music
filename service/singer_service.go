@@ -7,6 +7,7 @@ import (
 
 type ISingerService interface {
 	Singers() []*model.Singer
+	SingersBySex(sex int) []*model.Singer
 }
 
 type SingerService struct {
@@ -20,4 +21,8 @@ func NewSingerService() ISingerService {
 func (SS SingerService) Singers() []*model.Singer {
 	singers := SS.singerRepository.Singers()
 	return singers
+}
+
+func (SS SingerService) SingersBySex(sex int) []*model.Singer {
+	return SS.singerRepository.SingersBySex(sex)
 }

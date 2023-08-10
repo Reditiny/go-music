@@ -1,9 +1,7 @@
 package model
 
-import "gorm.io/gorm"
-
 type SongList struct {
-	gorm.Model
+	Basic
 	Title        string `orm:"title" json:"title"`
 	Pic          string `orm:"pic" json:"pic"`
 	Introduction string `orm:"introduction" json:"introduction"`

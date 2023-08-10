@@ -1,9 +1,7 @@
 package model
 
-import "gorm.io/gorm"
-
 type Banner struct {
-	gorm.Model
+	Basic
 	Pic string `orm:"pic" json:"pic"`
 }
 

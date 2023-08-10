@@ -1,9 +1,7 @@
 package model
 
-import "gorm.io/gorm"
-
 type Admin struct {
-	gorm.Model
+	Basic
 	Name     string `orm:"name" json:"name"`
 	Password string `orm:"password" json:"password"`
 }

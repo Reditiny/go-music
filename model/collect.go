@@ -1,9 +1,7 @@
 package model
 
-import "gorm.io/gorm"
-
 type Collect struct {
-	gorm.Model
+	Basic
 	UserId     int    `orm:"user_id" json:"user_id"`
 	Type       int    `orm:"type" json:"type"`
 	SongId     int    `orm:"song_id" json:"song_id"`

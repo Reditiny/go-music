@@ -17,5 +17,10 @@ func Success(c *gin.Context, data interface{}, message string) {
 
 // Fail 返回前端-失败
 func Fail(c *gin.Context, data interface{}, message string) {
+	Response(c, http.StatusOK, 200, data, message, "warning", false)
+}
+
+// Error 出现错误
+func Error(c *gin.Context, data interface{}, message string) {
 	Response(c, http.StatusBadRequest, 400, data, message, "error", false)
 }

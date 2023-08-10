@@ -1,10 +1,8 @@
 package model
 
-import "gorm.io/gorm"
-
 type Song struct {
-	gorm.Model
-	SingerId     int    `orm:"singer_id" json:"singer_id"`
+	Basic
+	SingerId     int    `orm:"singer_id" json:"singerId"`
 	Name         string `orm:"name" json:"name"`
 	Introduction string `orm:"introduction" json:"introduction"`
 	CreateTime   string `orm:"create_time" json:"create_time"` // 发行时间

@@ -10,5 +10,8 @@ func InitSong(r *gin.RouterGroup) {
 	songController := controller.NewSongController()
 	{
 		router.GET("/songList", songController.SongList)
+		router.GET("/songList/style/detail", songController.SongListByStyle)
+		router.GET("/listSong/detail", songController.ListSong)
+		router.GET("/song/detail", songController.Song)
 	}
 }
