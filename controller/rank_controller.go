@@ -2,6 +2,7 @@ package controller
 
 import (
 	"github.com/gin-gonic/gin"
+	"go-music/constant"
 	"go-music/response"
 	"go-music/service"
 	"strconv"
@@ -25,20 +26,20 @@ func (RC RankController) MyScore(c *gin.Context) {
 	songListId = c.Query("songListId")
 	consumerId = c.Query("consumerId")
 	if songListId == "" || consumerId == "" {
-		response.Error(c, nil, "参数缺失")
+		response.Error(c, nil, constant.PARAM_FAIL_GET)
 		return
 	}
 	song, err1 := strconv.Atoi(songListId)
 	consumer, err2 := strconv.Atoi(consumerId)
 	if err1 != nil || err2 != nil {
-		response.Error(c, nil, "无效参数")
+		response.Error(c, nil, constant.PARAM_FAIL_PARSE)
 		return
 	}
 	rank := RC.rankService.MyScore(consumer, song)
 	if rank.ID == 0 {
 		response.Error(c, nil, "未评价")
 	} else {
-		response.Success(c, rank.Score, "")
+		response.Success(c, rank.Score, constant.REQUSEST_SUCCESS)
 	}
 }
 
@@ -46,14 +47,14 @@ func (RC RankController) AvgScore(c *gin.Context) {
 	var songListId string
 	songListId = c.Query("songListId")
 	if songListId == "" {
-		response.Error(c, nil, "参数缺失")
+		response.Error(c, nil, constant.PARAM_FAIL_GET)
 		return
 	}
 	song, err := strconv.Atoi(songListId)
 	if err != nil {
-		response.Error(c, nil, "无效参数")
+		response.Error(c, nil, constant.PARAM_FAIL_PARSE)
 		return
 	}
 	score := RC.rankService.AvgScore(song)
-	response.Success(c, score, "")
+	response.Success(c, score, constant.REQUSEST_SUCCESS)
 }

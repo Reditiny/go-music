@@ -2,6 +2,7 @@ package controller
 
 import (
 	"github.com/gin-gonic/gin"
+	"go-music/constant"
 	"go-music/response"
 	"go-music/service"
 	"strconv"
@@ -22,17 +23,17 @@ func NewSingerController() ISingerController {
 
 func (SC SingerController) Singers(c *gin.Context) {
 	singers := SC.singerService.Singers()
-	response.Success(c, singers, "歌手列表")
+	response.Success(c, singers, constant.REQUSEST_SUCCESS)
 }
 
 func (SC SingerController) SingersBySex(c *gin.Context) {
 	sex, ok := c.GetQuery("sex")
 	sexInt, err := strconv.Atoi(sex)
 	if !ok || err != nil {
-		response.Fail(c, nil, "参数错误")
+		response.Fail(c, nil, constant.PARAM_FAIL_GET)
 	} else {
 		data := SC.singerService.SingersBySex(sexInt)
-		response.Success(c, data, "歌手列表")
+		response.Success(c, data, constant.REQUSEST_SUCCESS)
 	}
 
 }

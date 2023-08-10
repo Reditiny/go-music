@@ -10,6 +10,8 @@ type ISongRepository interface {
 	SongListByStyle(style string) []*model.SongList
 	ListSong(id int) []*model.ListSong
 	Song(id int) []*model.Song
+	SongListByTitle(title string) []*model.SongList
+	SongByName(name string) []*model.Song
 }
 
 type SongRepository struct {
@@ -41,5 +43,18 @@ func (SR SongRepository) ListSong(id int) []*model.ListSong {
 func (SR SongRepository) Song(id int) []*model.Song {
 	var song []*model.Song
 	common.DB.Where("id = ?", id).Find(&song)
+	return song
+}
+
+func (SR SongRepository) SongListByTitle(title string) []*model.SongList {
+	var songList []*model.SongList
+	// 模糊查询
+	common.DB.Where("title LIKE ?", "%"+title+"%").Find(&songList)
+	return songList
+}
+
+func (SR SongRepository) SongByName(name string) []*model.Song {
+	var song []*model.Song
+	common.DB.Where("name LIKE ?", "%"+name+"%").Find(&song)
 	return song
 }

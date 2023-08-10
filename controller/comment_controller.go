@@ -2,6 +2,7 @@ package controller
 
 import (
 	"github.com/gin-gonic/gin"
+	"go-music/constant"
 	"go-music/response"
 	"go-music/service"
 	"strconv"
@@ -22,14 +23,14 @@ func NewCommentController() ICommentController {
 func (CC CommentController) SongListComment(c *gin.Context) {
 	songListId := c.Query("songListId")
 	if songListId == "" {
-		response.Error(c, nil, "参数缺失")
+		response.Error(c, nil, constant.PARAM_FAIL_GET)
 		return
 	}
 	songList, err := strconv.Atoi(songListId)
 	if err != nil {
-		response.Error(c, nil, "无效参数")
+		response.Error(c, nil, constant.PARAM_FAIL_PARSE)
 		return
 	}
 	data := CC.commentService.SongListComment(songList)
-	response.Success(c, data, "获取成功")
+	response.Success(c, data, constant.REQUSEST_SUCCESS)
 }

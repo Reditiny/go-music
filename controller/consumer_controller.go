@@ -2,6 +2,7 @@ package controller
 
 import (
 	"github.com/gin-gonic/gin"
+	"go-music/constant"
 	"go-music/dto"
 	"go-music/model"
 	"go-music/response"
@@ -31,9 +32,9 @@ func (CC ConsumerController) Login(c *gin.Context) {
 	}
 	consumer := CC.consumerService.Login(user)
 	if len(consumer) != 0 {
-		response.Success(c, consumer, "登陆成功")
+		response.Success(c, consumer, constant.LOGIN_SUCCESS)
 	} else {
-		response.Fail(c, nil, "用户名或密码不存在")
+		response.Fail(c, nil, constant.LOGIN_FAIL)
 	}
 }
 
@@ -44,23 +45,23 @@ func (CC ConsumerController) Add(c *gin.Context) {
 	}
 	success := CC.consumerService.Add(consumer)
 	if success {
-		response.Success(c, nil, "注册成功")
+		response.Success(c, nil, constant.REGISTER_SUCCESS)
 	} else {
-		response.Fail(c, nil, "用户名已存在")
+		response.Fail(c, nil, constant.USER_EXIST)
 	}
 }
 
 func (CC ConsumerController) GetById(c *gin.Context) {
 	idStr := c.Query("id")
 	if idStr == "" {
-		response.Fail(c, nil, "参数缺失")
+		response.Fail(c, nil, constant.PARAM_FAIL_GET)
 		return
 	}
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
-		response.Fail(c, nil, "参数错误")
+		response.Fail(c, nil, constant.PARAM_FAIL_PARSE)
 		return
 	}
 	data := CC.consumerService.GetById(id)
-	response.Success(c, data, "请求成功")
+	response.Success(c, data, constant.REQUSEST_SUCCESS)
 }

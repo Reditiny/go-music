@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"github.com/gin-gonic/gin"
 	"go-music/common"
 	"go-music/config"
 	"go-music/router"
@@ -15,16 +16,21 @@ import (
 func main() {
 	// 初始化配置
 	config.InitConfig()
-	// 初始化数据库
+	// 初始化数据库 缓存
 	common.InitDatabase()
+	common.InitRedis()
 	// 配置路由
 	r := router.InitRouter()
-
+	// 将数据库连接池与 Gin 上下文关联
+	r.Use(func(c *gin.Context) {
+		c.Set("db", common.DB)
+		c.Next()
+	})
+	// 优雅地重启或停止
 	srv := &http.Server{
 		Addr:    ":8888",
 		Handler: r,
 	}
-	// 优雅地重启或停止
 	go func() {
 		// 服务连接
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {

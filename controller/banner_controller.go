@@ -2,6 +2,7 @@ package controller
 
 import (
 	"github.com/gin-gonic/gin"
+	"go-music/constant"
 	"go-music/response"
 	"go-music/service"
 )
@@ -20,5 +21,5 @@ func NewBannerController() IBannerController {
 
 func (BC BannerController) GetAllBanner(c *gin.Context) {
 	data := BC.bannerService.GetAllBanner()
-	response.Success(c, data, "成功获取轮播图与")
+	response.Success(c, data, constant.REQUSEST_SUCCESS)
 }

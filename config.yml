@@ -19,3 +19,8 @@ mysql:
   charset: utf8mb4
   # 字符集(utf8mb4_general_ci速度比utf8mb4_unicode_ci快些)
   collation: utf8mb4_general_ci
+
+redis:
+  host: 150.158.145.97
+  port: 6379
+  password: 20170802

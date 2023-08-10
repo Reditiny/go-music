@@ -16,6 +16,7 @@ var Conf = new(config)
 
 type config struct {
 	Mysql *MysqlConfig `mapstructure:"mysql" json:"mysql"`
+	Redis *RedisConfig `mapstructure:"redis" json:"redis"`
 }
 
 // InitConfig 设置读取配置信息
@@ -64,4 +65,10 @@ type MysqlConfig struct {
 	TablePrefix string `mapstructure:"table-prefix" json:"tablePrefix"`
 	Charset     string `mapstructure:"charset" json:"charset"`
 	Collation   string `mapstructure:"collation" json:"collation"`
+}
+
+type RedisConfig struct {
+	Password string `mapstructure:"password" json:"password"`
+	Host     string `mapstructure:"host" json:"host"`
+	Port     int    `mapstructure:"port" json:"port"`
 }
