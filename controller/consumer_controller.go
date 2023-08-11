@@ -14,6 +14,7 @@ type IConsumerController interface {
 	Login(c *gin.Context)
 	Add(c *gin.Context)
 	GetById(c *gin.Context)
+	Update(c *gin.Context)
 }
 
 type ConsumerController struct {
@@ -64,4 +65,14 @@ func (CC ConsumerController) GetById(c *gin.Context) {
 	}
 	data := CC.consumerService.GetById(id)
 	response.Success(c, data, constant.REQUSEST_SUCCESS)
+}
+
+func (CC ConsumerController) Update(c *gin.Context) {
+	var user model.Consumer
+	err := c.ShouldBind(&user)
+	if err != nil {
+		response.Fail(c, nil, constant.PARAM_FAIL_PARSE)
+		return
+	}
+	// TODO 更新用户信息
 }

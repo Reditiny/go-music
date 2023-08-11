@@ -11,6 +11,7 @@ import (
 type ISingerController interface {
 	Singers(c *gin.Context)
 	SingersBySex(c *gin.Context)
+	SingersById(c *gin.Context)
 }
 
 type SingerController struct {
@@ -35,5 +36,15 @@ func (SC SingerController) SingersBySex(c *gin.Context) {
 		data := SC.singerService.SingersBySex(sexInt)
 		response.Success(c, data, constant.REQUSEST_SUCCESS)
 	}
+}
 
+func (SC SingerController) SingersById(c *gin.Context) {
+	singerIdStr := c.Query("singerId")
+	singerId, err := strconv.Atoi(singerIdStr)
+	if err != nil {
+		response.Fail(c, nil, constant.PARAM_FAIL_GET)
+		return
+	}
+	data := SC.singerService.SingersById(singerId)
+	response.Success(c, data, constant.REQUSEST_SUCCESS)
 }

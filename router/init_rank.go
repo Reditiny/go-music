@@ -11,5 +11,6 @@ func InitRank(r *gin.RouterGroup) {
 	{
 		router.GET("/rankList", rankController.AvgScore)
 		router.GET("/rankList/user", rankController.MyScore)
+		router.POST("/rankList/add", rankController.AddScore)
 	}
 }

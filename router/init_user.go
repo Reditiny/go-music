@@ -12,5 +12,6 @@ func InitUser(r *gin.RouterGroup) {
 		router.POST("/login/status", consumerController.Login)
 		router.POST("/add", consumerController.Add)
 		router.GET("/detail", consumerController.GetById)
+		router.POST("/update", consumerController.Update)
 	}
 }

@@ -10,5 +10,6 @@ func InitComment(r *gin.RouterGroup) {
 	commentController := controller.NewCommentController()
 	{
 		router.GET("/comment/songList/detail", commentController.SongListComment)
+		router.POST("/comment/add", commentController.Add)
 	}
 }

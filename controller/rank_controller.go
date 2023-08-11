@@ -3,6 +3,7 @@ package controller
 import (
 	"github.com/gin-gonic/gin"
 	"go-music/constant"
+	"go-music/dto"
 	"go-music/response"
 	"go-music/service"
 	"strconv"
@@ -11,6 +12,7 @@ import (
 type IRankController interface {
 	AvgScore(c *gin.Context)
 	MyScore(c *gin.Context)
+	AddScore(c *gin.Context)
 }
 
 type RankController struct {
@@ -57,4 +59,14 @@ func (RC RankController) AvgScore(c *gin.Context) {
 	}
 	score := RC.rankService.AvgScore(song)
 	response.Success(c, score, constant.REQUSEST_SUCCESS)
+}
+
+func (RC RankController) AddScore(c *gin.Context) {
+	var rankScore dto.RankDto
+	err := c.ShouldBind(&rankScore)
+	if err != nil {
+		response.Error(c, nil, constant.PARAM_FAIL_PARSE)
+	}
+	RC.rankService.AddScore(rankScore)
+	response.Success(c, nil, constant.REQUSEST_SUCCESS)
 }

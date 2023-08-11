@@ -1,6 +1,7 @@
 package service
 
 import (
+	"go-music/dto"
 	"go-music/model"
 	"go-music/repository"
 )
@@ -8,6 +9,7 @@ import (
 type IRankService interface {
 	AvgScore(song int) int
 	MyScore(consumer int, song int) *model.RankList
+	AddScore(score dto.RankDto)
 }
 
 type RankService struct {
@@ -35,4 +37,13 @@ func (RS RankService) AvgScore(song int) int {
 
 func (RS RankService) MyScore(consumer int, song int) *model.RankList {
 	return RS.rankRepository.MyScore(consumer, song)
+}
+
+func (RS RankService) AddScore(score dto.RankDto) {
+	rankList := model.RankList{
+		ConsumerId: score.ConsumerId,
+		SongListId: score.SongListId,
+		Score:      score.Score,
+	}
+	RS.rankRepository.AddScore(rankList)
 }

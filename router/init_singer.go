@@ -11,5 +11,6 @@ func InitSinger(r *gin.RouterGroup) {
 	{
 		r.GET("/singer", singerController.Singers)
 		r.GET("/singer/sex/detail", singerController.SingersBySex)
+		r.GET("/song/singer/detail", singerController.SingersById)
 	}
 }

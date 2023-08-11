@@ -2,13 +2,13 @@ mysql:
   # 用户名
   username: root
   # 密码
-  password: 20170802
+  password:
   # 数据库名
   database: music
   # 主机地址
-  host: 150.158.145.97
+  host:
   # 端口
-  port: 3306
+  port:
   # 连接字符串参数
   query: parseTime=True&loc=Local&timeout=10000ms
   # 是否打印日志
@@ -21,6 +21,6 @@ mysql:
   collation: utf8mb4_general_ci
 
 redis:
-  host: 150.158.145.97
-  port: 6379
-  password: 20170802
+  host:
+  port:
+  password:
